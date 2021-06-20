@@ -1,0 +1,13 @@
+apt-transport-https
+build-essential
+curl
+fish
+git
+htop
+lsof
+man
+pigz
+procps
+software-properties-common
+strace
+wget
