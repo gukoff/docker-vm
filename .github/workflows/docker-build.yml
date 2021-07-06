@@ -1,4 +1,4 @@
-name: build-and-push
+name: only build
 
 on:
   pull_request:
