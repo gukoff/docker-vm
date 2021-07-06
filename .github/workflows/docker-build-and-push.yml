@@ -27,6 +27,7 @@ jobs:
           name: Bump version
 
       - name: Checkout codebase for version bumping
+        uses: actions/checkout@v2
         with:
           fetch-depth: '0'
 
