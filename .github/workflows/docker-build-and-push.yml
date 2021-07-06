@@ -26,6 +26,10 @@ jobs:
           
           name: Bump version
 
+      - name: Checkout codebase for version bumping
+        with:
+          fetch-depth: '0'
+
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@9885a4f9af674ba472de91fb3c0cb033ecb32b7e
         id: new_version
