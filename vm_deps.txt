@@ -4,6 +4,7 @@ curl
 fish
 git
 htop
+libpython2.7
 lsof
 man
 pigz
