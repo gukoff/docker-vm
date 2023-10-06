@@ -1,0 +1,5 @@
+bison
+build-essential
+clang
+flex
+wget
