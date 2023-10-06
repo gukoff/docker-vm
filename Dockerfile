@@ -1,4 +1,4 @@
-FROM phusion/baseimage:focal-1.0.0 as perf_builder
+FROM phusion/baseimage:jammy-1.0.1 as perf_builder
 COPY perf_deps.txt /tmp/perf_deps.txt 
 RUN apt-get update \
     && xargs -a /tmp/perf_deps.txt apt-get install -y \
@@ -8,7 +8,7 @@ RUN git clone --depth=1 https://github.com/torvalds/linux.git
 RUN make -C linux/tools/perf
 # now perf tool is at linux/tools/perf/perf
 
-FROM phusion/baseimage:focal-1.0.0
+FROM phusion/baseimage:jammy-1.0.1
 
 COPY --from=perf_builder /linux/tools/perf/perf /usr/bin/perf
 
@@ -24,15 +24,15 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# dotnet and pwsh for ubuntu 20.04
+# dotnet and pwsh for ubuntu 22.04
 # https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#2004-
 # https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-7.1#ubuntu-2004
-RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
+RUN wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
     && sudo dpkg -i packages-microsoft-prod.deb \
     && sudo add-apt-repository universe \
     && apt-get update \
     && sudo apt-get install -y apt-transport-https \
     && sudo apt-get update \
-    && sudo apt-get install -y dotnet-sdk-5.0 powershell \
+    && sudo apt-get install -y dotnet-sdk-7.0 powershell \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
